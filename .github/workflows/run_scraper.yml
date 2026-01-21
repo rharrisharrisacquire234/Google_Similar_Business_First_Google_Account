@@ -2,10 +2,9 @@ name: Monthly Google Maps Scraper
 
 on:
   schedule:
-    # Runs at 02:00 UTC on the 1st day of every month
+    # Run at 02:00 UTC on the 1st of every month
     - cron: "0 2 1 * *"
 
-  # Allows manual trigger from GitHub UI
   workflow_dispatch:
 
 jobs:
@@ -22,10 +21,18 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: 📦 Install system dependencies
+      - name: 📦 Install system dependencies (Playwright)
         run: |
           sudo apt-get update
-          sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2
+          sudo apt-get install -y \
+            libnss3 \
+            libatk-bridge2.0-0 \
+            libgtk-3-0 \
+            libxss1 \
+            libasound2t64 \
+            libgbm1 \
+            libdrm2 \
+            libxkbcommon0
 
       - name: 📦 Install Python dependencies
         run: |
